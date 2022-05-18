@@ -5,15 +5,14 @@ import ru.netology.exeptions.NotFoundException;
 import ru.netology.product.Product;
 
 public class ProductRepository {
-    private Product[] products = new Product[0];
+    private Product[] product = new Product[0];
 
     public Product[] findAll() {
-        return products;
+        return product;
     }
 
-    public Product findById(int id) throws NotFoundException {
-
-        for (Product product : products) {
+    public Product findById(int id) {
+        for (Product product : product) {
             if (product.getId() == id) {
                 return product;
             }
@@ -21,35 +20,38 @@ public class ProductRepository {
         return null;
     }
 
+    public void save(Product item) {
 
-    public void save(Product product) throws AlreadyExistsException {
-        for (Product product : products) {
-            if (existing) {
-                throw new AlreadyExistsException("Element with id: " + id + " already exists");
+        for (Product product : product) {
+            if (product.getId() == item.getId()) {
+                throw new AlreadyExistsException("Element with id: " + item.getId() + " already exists");
             }
         }
-        int length = products.length + 1;
+        int length = product.length + 1;
         Product[] tmp = new Product[length];
-        System.arraycopy(products, 0, tmp, 0, products.length);
+        System.arraycopy(product, 0, tmp, 0, product.length);
         int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = product;
-        products = tmp;
+        tmp[lastIndex] = item;
+        product = tmp;
+
     }
 
-    public void removeById(int id) throws NotFoundException {
+    public void removeById(int id) {
 
         if (findById(id) == null) {
             throw new NotFoundException("Element with id: " + id + " not found");
         }
-        int length = products.length - 1;
+        int length = product.length - 1;
         Product[] tmp = new Product[length];
         int index = 0;
-        for (Product product : products) {
-            if (product.getId() != id) {
-                tmp[index] = product;
+        for (Product item : product) {
+            if (item.getId() != id) {
+                tmp[index] = item;
                 index++;
             }
         }
-        products = tmp;
+        product = tmp;
     }
+
+
 }

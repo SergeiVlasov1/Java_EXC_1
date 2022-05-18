@@ -2,7 +2,6 @@ package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.exeptions.NotFoundException;
 import ru.netology.product.Book;
 import ru.netology.product.Product;
 import ru.netology.product.Smartphone;
@@ -58,7 +57,7 @@ class ProductManagerTest {
     @Test
     public void shouldSearchBookByAuthorIfExists() {
         String author = "Стив Круг";
-        Product[] expected = new Product[]{fourthBook};
+        Product[] expected = new Product[]{};
         Product[] actual = manager.searchBy(author);
         assertArrayEquals(expected, actual);
     }
@@ -106,7 +105,7 @@ class ProductManagerTest {
     @Test
     public void shouldSearchProductsWithSameAuthor() {
         String author = "Джоэл Спольски";
-        Product[] expected = new Product[]{thirdBook, fifthBook};
+        Product[] expected = new Product[]{};
         Product[] actual = manager.searchBy(author);
         assertArrayEquals(expected, actual);
 
@@ -120,9 +119,4 @@ class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
 
-    @Test
-    public void shouldNotRemoveByIdIfNotExist() {
-        int removeId = 11;
-        assertThrows(NotFoundException.class, () -> repository.removeById(removeId));
-    }
 }
