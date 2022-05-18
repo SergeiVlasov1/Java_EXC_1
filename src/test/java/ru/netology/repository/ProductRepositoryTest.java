@@ -45,7 +45,7 @@ class ProductRepositoryTest {
         repository.removeById(2);
 
         Product[] actual = repository.findAll();
-        Product[] expected = {firstBook, secondBook, thirdBook, fourthBook, fifthBook, firstSmartphone, secondSmartphone, thirdSmartphone, fourthSmartphone, fifthSmartphone};
+        Product[] expected = {firstBook, thirdBook, fourthBook, fifthBook, firstSmartphone, secondSmartphone, thirdSmartphone, fourthSmartphone, fifthSmartphone};
 
         assertArrayEquals(expected, actual);
     }
